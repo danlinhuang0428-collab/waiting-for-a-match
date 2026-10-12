@@ -1,0 +1,324 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#faf7f2" />
+    <meta name="description" content="A 30-second story about waiting for a match." />
+    <title>Waiting for a Match</title>
+    <style>
+:root {
+  color-scheme: light;
+  --ink: #24242b;
+  --paper: #fffefa;
+  --pink: #d60070;
+  --pink-light: #ffe2ef;
+  --teal: #007f79;
+  --purple: #7762bd;
+}
+
+* { box-sizing: border-box; }
+html { min-width: 280px; background: #f7f5f1; }
+body { margin: 0; color: var(--ink); font-family: Arial, Helvetica, sans-serif; -webkit-font-smoothing: antialiased; }
+button, input, a { font: inherit; }
+button { cursor: pointer; }
+button:disabled { cursor: progress; opacity: .7; }
+a { text-decoration: none; }
+[hidden] { display: none !important; }
+:focus-visible { outline: 3px solid var(--purple); outline-offset: 4px; }
+
+.app-shell { width: 100%; max-width: 460px; min-height: 100dvh; margin: 0 auto; background: var(--paper); }
+.topbar { display: flex; align-items: center; height: 58px; padding: 0 24px; border-bottom: 1px solid #e9e5df; }
+.brand { display: flex; align-items: baseline; gap: 9px; white-space: nowrap; }
+.brand__press { font: 700 27px/1 Georgia, 'Times New Roman', serif; letter-spacing: -.07em; }
+.brand__period { color: var(--pink); }
+.brand__cross { color: #77747b; font-size: 17px; }
+.brand__nmdp { font-size: 14px; font-weight: 900; letter-spacing: -.045em; }
+
+.screen { min-height: calc(100dvh - 58px); padding: 24px 24px max(24px, env(safe-area-inset-bottom)); }
+.screen--story { display: flex; flex-direction: column; }
+.eyebrow { margin: 0; color: #42434b; font-size: 10px; font-weight: 800; letter-spacing: .13em; }
+h1, h2, p { margin-top: 0; }
+.story-intro h1 { margin: 12px 0 20px; font-size: clamp(25px, 7.2vw, 34px); line-height: 1.1; letter-spacing: -.055em; }
+.story-intro h1 em { color: var(--pink); font-family: Georgia, 'Times New Roman', serif; font-size: 1.03em; font-weight: 400; letter-spacing: -.055em; }
+.story-player { width: 100%; }
+.story-frame { position: relative; overflow: hidden; width: 100%; aspect-ratio: 1 / .94; border-radius: 20px; background: #f4dfe7; }
+.story-frame img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.story-frame__caption { position: absolute; right: 12px; bottom: 12px; left: 12px; padding: 12px 14px; border-radius: 12px; background: var(--paper); font: 700 clamp(16px, 4.7vw, 20px)/1.14 Georgia, 'Times New Roman', serif; letter-spacing: -.025em; }
+.player-meta { display: flex; align-items: center; justify-content: space-between; gap: 14px; padding-top: 16px; }
+.player-meta h2 { margin: 0 0 5px; font-size: 22px; line-height: 1.05; letter-spacing: -.045em; }
+.fictional-label { color: #5d5b62; font-size: 12px; font-weight: 400; letter-spacing: 0; }
+.player-meta p { max-width: 285px; margin: 0; color: #44434a; font-size: 13px; line-height: 1.35; }
+.icon-button { display: grid; flex: none; place-items: center; width: 42px; height: 42px; border: 1.5px solid var(--ink); border-radius: 50%; background: transparent; color: var(--ink); font-size: 20px; font-weight: 700; }
+.icon-button:hover { background: var(--pink-light); }
+.progress-block { margin-top: 19px; }
+.progress-track { height: 6px; overflow: hidden; border-radius: 99px; background: #e4e3df; }
+.progress-fill { display: block; width: 0; height: 100%; border-radius: inherit; background: var(--pink); }
+.time-row { display: flex; justify-content: space-between; margin-top: 7px; color: #5a5960; font-size: 11px; font-weight: 700; }
+.story-actions { display: flex; flex-direction: column; align-items: stretch; margin-top: auto; padding-top: 18px; }
+
+.button { display: flex; align-items: center; justify-content: space-between; gap: 16px; width: 100%; min-height: 52px; padding: 12px 18px; border: 2px solid transparent; border-radius: 12px; font-size: 13px; font-weight: 900; letter-spacing: .035em; text-align: left; transition: background-color .15s ease; }
+.button span { font-size: 20px; font-weight: 400; line-height: 1; }
+.button--pink { background: var(--pink); color: white; }
+.button--pink:hover { background: #b90060; }
+.button--outline { border-color: var(--teal); background: transparent; color: #075e59; }
+.button--outline:hover { background: #e4f4f0; }
+.text-button, .back-button { width: fit-content; border: 0; background: none; color: var(--ink); font-weight: 700; }
+.text-button { align-self: center; min-height: 38px; padding: 8px 10px; font-size: 12px; text-decoration: underline; text-underline-offset: 3px; }
+.text-button span { margin-left: 5px; }
+.back-button { min-height: 32px; padding: 5px 0; font-size: 12px; }
+.back-button span { padding-right: 5px; font-size: 17px; }
+
+.screen--choice { padding-top: 18px; }
+.screen--choice h1 { margin: clamp(54px, 12vh, 96px) 0 34px; font-size: clamp(38px, 10vw, 48px); line-height: 1; letter-spacing: -.065em; }
+form label { display: block; margin-bottom: 8px; font-size: 13px; font-weight: 800; }
+form input { display: block; width: 100%; height: 52px; padding: 0 14px; border: 1.5px solid #77747b; border-radius: 11px; background: white; color: var(--ink); font-size: 15px; }
+form input::placeholder { color: #69676f; opacity: 1; }
+form input[aria-invalid='true'] { border-color: #b00045; }
+form .button { margin-top: 12px; }
+.error-message { margin: 8px 0 0; color: #a50040; font-size: 12px; font-weight: 700; }
+.email-result { min-height: 128px; margin: 0; padding: 38px 16px; border-radius: 12px; background: #e4f4f0; color: #075e59; font-size: 16px; font-weight: 700; line-height: 1.35; }
+.divider { display: flex; align-items: center; gap: 14px; margin: 28px 0; color: #6a686c; font-size: 11px; font-weight: 800; letter-spacing: .1em; }
+.divider::before, .divider::after { content: ''; flex: 1; height: 1px; background: #d8d5d2; }
+
+@media (max-width: 360px) {
+  .topbar { padding-right: 18px; padding-left: 18px; }
+  .screen { padding-right: 18px; padding-left: 18px; }
+  .story-intro h1 { font-size: 25px; }
+  .story-frame { aspect-ratio: 1 / .84; }
+  .screen--choice h1 { font-size: 38px; }
+}
+
+@media (max-height: 690px) {
+  .screen--story { padding-top: 15px; }
+  .story-intro h1 { margin: 8px 0 13px; }
+  .story-frame { aspect-ratio: 1 / .78; }
+  .player-meta { padding-top: 11px; }
+  .progress-block { margin-top: 12px; }
+  .story-actions { padding-top: 9px; }
+  .screen--choice h1 { margin-top: 48px; margin-bottom: 25px; }
+  .divider { margin: 20px 0; }
+}
+
+@media (min-width: 700px) {
+  body { min-height: 100vh; background: #f3f0eb; }
+  .app-shell { box-shadow: 0 0 0 1px #e2ddd6; }
+  .story-intro h1 { font-size: 33px; }
+  .screen--choice h1 { font-size: 48px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; }
+}
+
+</style>
+    <script defer>
+const STORY_LENGTH = 30;
+const scenes = [
+  { start: 0, image: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0MDAgMzgwIiByb2xlPSJpbWciIGFyaWEtbGFiZWxsZWRieT0idGl0bGUiPgogIDx0aXRsZSBpZD0idGl0bGUiPkZpY3Rpb25hbCBNaXJhIHNrZXRjaGVzIGF0IGEgY2FmZTwvdGl0bGU+CiAgPHJlY3Qgd2lkdGg9IjQwMCIgaGVpZ2h0PSIzODAiIGZpbGw9IiNmNmRjZTgiLz4KICA8cGF0aCBkPSJNMjQgNzRjMzgtMzMgMTAyLTQ2IDE2Ni0yNiA2MiAxOSAxMTUgMTAgMTgwLTIxdjMwNkgyMFoiIGZpbGw9IiNmM2JhY2UiLz4KICA8cGF0aCBkPSJNMTggMjk2YzcwLTMwIDE0OS0yNCAyMDgtOCA1OSAxNSAxMTggOCAxNzQtMTN2MTA1SDB2LTc0WiIgZmlsbD0iI2Q5YzRlZiIvPgogIDxwYXRoIGQ9Ik0zMDggNTVjMTAtMjAgMjQtMTAgMTggN00zMzEgNjJjMjAtMTIgMjcgMiAxNiAxNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMjQyNDJiIiBzdHJva2Utd2lkdGg9IjMiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgogIDxjaXJjbGUgY3g9IjcwIiBjeT0iMTMyIiByPSIzMSIgZmlsbD0iI2ZkZjZkZSIgc3Ryb2tlPSIjMjQyNDJiIiBzdHJva2Utd2lkdGg9IjMiLz4KICA8cGF0aCBkPSJNNTIgMTMyYzYtOSAxMi0xMCAxOC0xIDctOSAxMy04IDIwIDFNNDUgMTYzaDQ4IiBmaWxsPSJub25lIiBzdHJva2U9IiNlOTAwNzkiIHN0cm9rZS13aWR0aD0iMyIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgPHBhdGggZD0iTTExMyAzMzZjMTctNzUgNDYtMTEzIDEwOC0xMTYgNTctMyA4OSA0MSA5NiAxMTZaIiBmaWxsPSIjNmM1OGFjIiBzdHJva2U9IiMyNDI0MmIiIHN0cm9rZS13aWR0aD0iNCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPgogIDxwYXRoIGQ9Ik0xNTUgMjQ5YzQtMzkgOC04MSA0NS0xMDAgMzQtMTcgNjYgOCA3MiA0OGwtMTUgNDAtNjcgMjdaIiBmaWxsPSIjMzAyYzNhIiBzdHJva2U9IiMyNDI0MmIiIHN0cm9rZS13aWR0aD0iNCIvPgogIDxwYXRoIGQ9Ik0xNzkgMTgzYy0zIDI1LTMgNTcgMTIgNzMgMTIgMTMgMzkgMTggNTYgMyAxOC0xNyAyNC00MiAyMi02OC0yMyA3LTUxLTItNjQtMTgtOCA4LTE3IDEyLTI2IDEwWiIgZmlsbD0iI2M3OGQ3MiIgc3Ryb2tlPSIjMjQyNDJiIiBzdHJva2Utd2lkdGg9IjMiLz4KICA8cGF0aCBkPSJNMTgxIDE4OGMtNS0yMSAxMi00NiAzMC00NyAyOC0xNyA1NSA0IDYxIDI0IDExIDI1LTQgMzktNCAzOS04LTIxLTI1LTM4LTM5LTQwLTE2IDIwLTM2IDI1LTQ4IDI0WiIgZmlsbD0iIzMwMmMzYSIgc3Ryb2tlPSIjMjQyNDJiIiBzdHJva2Utd2lkdGg9IjMiLz4KICA8cGF0aCBkPSJNMjA5IDIxOGwyIDFtMzQtNSAyIDEiIHN0cm9rZT0iIzI0MjQyYiIgc3Ryb2tlLXdpZHRoPSI1IiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KICA8cGF0aCBkPSJNMjIzIDIzOWM3IDUgMTQgNCAyMC0yIiBmaWxsPSJub25lIiBzdHJva2U9IiM3MTJlNDkiIHN0cm9rZS13aWR0aD0iMyIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgPHBhdGggZD0iTTE0NiAyOTRjLTE1LTYtMjcgMC0zNiAxNmwtMTQgMjYgMzIgMTQgMjgtMzZtMTU0LTI2YzE3IDEgMjUgMTMgMzQgMzBsLTEzIDE5LTMzLTExIiBmaWxsPSIjNmM1OGFjIiBzdHJva2U9IiMyNDI0MmIiIHN0cm9rZS13aWR0aD0iNCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPgogIDxwYXRoIGQ9Ik0yNyAzMjljNzYtMjMgMTYyLTE4IDIyNy02IDQ2IDkgOTIgMTEgMTQ2LTF2NThIMHYtNDNaIiBmaWxsPSIjZmZmZWZhIiBzdHJva2U9IiMyNDI0MmIiIHN0cm9rZS13aWR0aD0iNCIvPgogIDxwYXRoIGQ9Ik0xMTAgMzEzbDExNy04IDMwIDU3LTEyNiAxWiIgZmlsbD0iI2ZmZjRkNSIgc3Ryb2tlPSIjMjQyNDJiIiBzdHJva2Utd2lkdGg9IjQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz4KICA8cGF0aCBkPSJNMTQwIDMyOGMxNC04IDI0LTQgMzAgNyAxMi0xMiAyOC0xMSA0MSAwbS00OSAxOGMyMC0xMCA0MC05IDU4IDEiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2U5MDA3OSIgc3Ryb2tlLXdpZHRoPSIzIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KICA8cGF0aCBkPSJNMzEwIDMyMmgzNmwtNSAzOGgtMjVaIiBmaWxsPSIjZDdmM2VlIiBzdHJva2U9IiMyNDI0MmIiIHN0cm9rZS13aWR0aD0iMyIvPgogIDxwYXRoIGQ9Ik0zMTEgMzIyaDM0bS0yNy04Yy01LTkgMy0xMiA0LTIxbTkgMTljLTUtMTEgMy0xMyAzLTIzIiBmaWxsPSJub25lIiBzdHJva2U9IiMyNDI0MmIiIHN0cm9rZS13aWR0aD0iMyIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgPHBhdGggZD0iTTIwIDU3bDEyLTdtMSAyNSA5IDNtMzIwIDExNSAxMyA1bS0xMyAxMyAxMSAxMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZTkwMDc5IiBzdHJva2Utd2lkdGg9IjQiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgo8L3N2Zz4K", alt: "Illustration of fictional Mira sketching at a cafe", caption: "Mira loves sketching the little moments around her." },
+  { start: 10, image: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0MDAgMzgwIiByb2xlPSJpbWciIGFyaWEtbGFiZWxsZWRieT0idGl0bGUiPgogIDx0aXRsZSBpZD0idGl0bGUiPk1pcmEgZHJlYW1zIGFib3V0IHRoZSBwbGFjZXMgaW4gaGVyIHNrZXRjaGJvb2s8L3RpdGxlPgogIDxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iMzgwIiBmaWxsPSIjZTVkZGY1Ii8+CiAgPHBhdGggZD0iTTAgMTMwYzY3LTM2IDEwOS0zMiAxNjYgMiA1MyAzMiAxMDUgMjQgMTU3LTggMjktMTggNTQtMjMgNzctMTZ2MjcySDBaIiBmaWxsPSIjYzhmMGU5Ii8+CiAgPGNpcmNsZSBjeD0iMjk3IiBjeT0iOTQiIHI9IjU5IiBmaWxsPSIjZmZjZWUyIi8+CiAgPHBhdGggZD0iTTEwIDIzMmM0OC00MCA4Ni01MCAxMjQtMjMgNDYtNDIgOTQtMzUgMTMzLTEgNDMtMjkgOTEtMjQgMTMzIDEydjE2MEgwVjI0NFoiIGZpbGw9IiM4OWM4YmEiIHN0cm9rZT0iIzI0MjQyYiIgc3Ryb2tlLXdpZHRoPSI0IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+CiAgPHBhdGggZD0iTTE4IDI1MWMzNy0xNSA3Mi0yMSAxMTEtMTRtMTUwLThjMzEtMTAgNjQtNyA5OSA4IiBmaWxsPSJub25lIiBzdHJva2U9IiMzMTdmNzciIHN0cm9rZS13aWR0aD0iNCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgPHBhdGggZD0iTTMxIDE4NGwyMy00OCAyNCA0OFptNC03aDM5bS0yMS00NnYtMTVtLTM0IDczaDcyIiBmaWxsPSIjZmZmM2Q5IiBzdHJva2U9IiMyNDI0MmIiIHN0cm9rZS13aWR0aD0iMyIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPgogIDxwYXRoIGQ9Ik0zMDIgMjAwdi01NWwyOC0yMSAyOSAyMXY1NW0tNjUgMGg3NG0tNTIgMHYtMzRoMjV2MzQiIGZpbGw9IiNmN2I1ZDIiIHN0cm9rZT0iIzI0MjQyYiIgc3Ryb2tlLXdpZHRoPSIzIiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+CiAgPHBhdGggZD0iTTExMSAzNzljMTctNTcgNDEtODUgODYtOTMgNTMtMTAgODYgMjQgMTA1IDkzWiIgZmlsbD0iIzZjNThhYyIgc3Ryb2tlPSIjMjQyNDJiIiBzdHJva2Utd2lkdGg9IjQiLz4KICA8cGF0aCBkPSJNMTQwIDMwNWMwLTQ5IDktMTAwIDQ5LTExMiAzMy0xNyA3MSAxMiA3OCA0N2wtMTIgNTItODQgMzFaIiBmaWxsPSIjMzAyYzNhIiBzdHJva2U9IiMyNDI0MmIiIHN0cm9rZS13aWR0aD0iNCIvPgogIDxwYXRoIGQ9Ik0xNjIgMjQ2Yy0zIDI0IDEgNDggMTYgNjAgMTcgMTQgNDAgMTggNTkgMiAxNi0xNCAyMy0zMiAyMi01OS0yMyA0LTQzLTItNjAtMjAtMTMgMTEtMjcgMTctMzcgMTdaIiBmaWxsPSIjYzc4ZDcyIiBzdHJva2U9IiMyNDI0MmIiIHN0cm9rZS13aWR0aD0iMyIvPgogIDxwYXRoIGQ9Ik0xNjcgMjQ5Yy01LTE5IDctMzggMjMtNDkgMzMtMTkgNjcgNSA3MiAzNS0xMy0xNy0zNC0yMS00Ni0yMC04IDE4LTI5IDMxLTQ5IDM0WiIgZmlsbD0iIzMwMmMzYSIgc3Ryb2tlPSIjMjQyNDJiIiBzdHJva2Utd2lkdGg9IjMiLz4KICA8cGF0aCBkPSJNMTkzIDI3MWwyIDFtMzgtNiAyIDEiIHN0cm9rZT0iIzI0MjQyYiIgc3Ryb2tlLXdpZHRoPSI1IiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KICA8cGF0aCBkPSJNMjA1IDI5MWM4IDUgMTYgNCAyMi0zIiBmaWxsPSJub25lIiBzdHJva2U9IiM3MTMwNGEiIHN0cm9rZS13aWR0aD0iMyIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgPHBhdGggZD0iTTUxIDMzOWw5My0yMSAyOCA2Mkg2OFoiIGZpbGw9IiNmZmZlZmEiIHN0cm9rZT0iIzI0MjQyYiIgc3Ryb2tlLXdpZHRoPSI0IiBzdHJva2UtbGluZWpvaW49InJvdW5kIi8+CiAgPHBhdGggZD0iTTcwIDM0NGMxNS0xMCAzMC0xMCA0MiAwIDEwLTEyIDI0LTE1IDM3LThtLTY4IDIzYzE5LTQgMzYtMyA1MCA2IiBmaWxsPSJub25lIiBzdHJva2U9IiNlOTAwNzkiIHN0cm9rZS13aWR0aD0iMyIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgPHBhdGggZD0iTTI2OSAzNDhsNzMtMjUgMTYgNTdoLTgwWiIgZmlsbD0iI2ZmZmVmYSIgc3Ryb2tlPSIjMjQyNDJiIiBzdHJva2Utd2lkdGg9IjQiLz4KICA8cGF0aCBkPSJNMjk0IDM1MWwxMC0xNiAxNyA3IDctMTdtLTI4IDM5IDIyLTkiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzAwN2Y3OSIgc3Ryb2tlLXdpZHRoPSIzIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KICA8cGF0aCBkPSJNMjI1IDc3YzEwLTExIDIzLTkgMzEtMSAxMC0xMyAyNC03IDI3IDQgNCAyMC0yNSAzNi0yOSAzOS04LTQtNDAtMjMtMjktNDJaIiBmaWxsPSIjZTkwMDc5IiBzdHJva2U9IiMyNDI0MmIiIHN0cm9rZS13aWR0aD0iMyIvPgogIDxwYXRoIGQ9Ik03NCA2N2w5LTE0bTcgMjggMTUtM20yNDIgMjkgMTMgOCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZTkwMDc5IiBzdHJva2Utd2lkdGg9IjQiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgo8L3N2Zz4K", alt: "Illustration of Mira imagining places to explore", caption: "Her sketchbook is full of places she still wants to see." },
+  { start: 20, image: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0MDAgMzgwIiByb2xlPSJpbWciIGFyaWEtbGFiZWxsZWRieT0idGl0bGUiPgogIDx0aXRsZSBpZD0idGl0bGUiPk1pcmEgbG9va3MgYWhlYWQgd2l0aCBob3BlIHdoaWxlIHdhaXRpbmcgZm9yIGEgbWF0Y2g8L3RpdGxlPgogIDxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iMzgwIiBmaWxsPSIjZjlkOWU4Ii8+CiAgPHBhdGggZD0iTTAgNTljNjYgMzEgMTExIDI4IDE1OS03IDU1LTQwIDEyMi0zNiAxNzAgMCAyNSAxOSA0OSAyNCA3MSAyMHYzMDhIMFoiIGZpbGw9IiNmNWJiZDIiLz4KICA8Y2lyY2xlIGN4PSIyOTQiIGN5PSIxMDEiIHI9IjY3IiBmaWxsPSIjZmVmM2Q1Ii8+CiAgPHBhdGggZD0iTTAgMjg5Yzg1LTM3IDE1Mi0zOSAyMTEtMTYgNjAgMjQgMTI3IDI5IDE4OS02djExM0gwWiIgZmlsbD0iI2NjZWRlOCIvPgogIDxwYXRoIGQ9Ik00OSAzODBjMTctMTA0IDYwLTE1NSAxNDQtMTU5IDgyLTQgMTM1IDU0IDE1MCAxNTlaIiBmaWxsPSIjNmM1OGFjIiBzdHJva2U9IiMyNDI0MmIiIHN0cm9rZS13aWR0aD0iNCIvPgogIDxwYXRoIGQ9Ik0xNDEgMjM1Yy03LTUwLTItMTA0IDQzLTEyNSA0OC0yMSAxMDIgMjMgOTQgODRsLTE4IDUyLTk1IDIyWiIgZmlsbD0iIzMwMmMzYSIgc3Ryb2tlPSIjMjQyNDJiIiBzdHJva2Utd2lkdGg9IjQiLz4KICA8cGF0aCBkPSJNMTU4IDE2MmMtNCAyOS0zIDY5IDEyIDg4IDE2IDE5IDQ0IDIyIDY0IDcgMjItMTYgMzMtNTAgMjktNzktMjIgOC00NyAwLTYzLTIyLTExIDktMjUgMTUtNDIgNloiIGZpbGw9IiNjNzhkNzIiIHN0cm9rZT0iIzI0MjQyYiIgc3Ryb2tlLXdpZHRoPSIzIi8+CiAgPHBhdGggZD0iTTE1NyAxNjRjLTctMzEgMTctNjYgNDktNjcgNDEtMiA3MCAyOCA2MiA3MC0xNS0yMy0zNS0zMi01My0zMS0xNCAxOC0zNyAyOS01OCAyOFoiIGZpbGw9IiMzMDJjM2EiIHN0cm9rZT0iIzI0MjQyYiIgc3Ryb2tlLXdpZHRoPSIzIi8+CiAgPHBhdGggZD0iTTE4OSAyMDVsMiAxbTQwLTUgMiAxIiBzdHJva2U9IiMyNDI0MmIiIHN0cm9rZS13aWR0aD0iNSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgPHBhdGggZD0iTTE5OSAyMjljOSA4IDE5IDggMjggMSIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNzEzMDRhIiBzdHJva2Utd2lkdGg9IjMiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgogIDxwYXRoIGQ9Ik04NiAzNzVjMTQtNDUgMjktNzAgNjItODNsMzIgNDQtMyA0NG0xMzgtNWMtMTAtNDItMjYtNjgtNjAtODNsLTI5IDQ1IDMgNDMiIGZpbGw9IiM2YzU4YWMiIHN0cm9rZT0iIzI0MjQyYiIgc3Ryb2tlLXdpZHRoPSI0Ii8+CiAgPHBhdGggZD0iTTI5NSAxMDNjMTMtMTYgMzEtMTMgMzYtMSAxMC0xNiAyOC0xMSAzMCA0IDIgMjQtMjUgNDItMzQgNDYtMTMtOC00Ni0zMS0zMi00OVoiIGZpbGw9IiNlOTAwNzkiIHN0cm9rZT0iIzI0MjQyYiIgc3Ryb2tlLXdpZHRoPSIzIi8+CiAgPHBhdGggZD0iTTQ3IDEwNWMxMy0xOCAzMC0yNCA0Ni0xNG0tNTEgMzNjMTItNyAyNC04IDM3LTNtMjQ3IDYzYzEwIDAgMjAgNCAyOSAxMm0tMTggOWMxMiA0IDIxIDExIDI2IDE5IiBmaWxsPSJub25lIiBzdHJva2U9IiMwMDdmNzkiIHN0cm9rZS13aWR0aD0iNCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgPHBhdGggZD0iTTM2IDI5NGM4LTIyIDIxLTI4IDM3LTI1bTI4NiAyMmMtOS0xOS0yMi0yMy0zNi0yMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZTkwMDc5IiBzdHJva2Utd2lkdGg9IjQiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgogIDxwYXRoIGQ9Ik01NSA0N2wxMi0xMm02IDI3IDE1IDBtMjcxIDI0IDE0LTkiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzI0MjQyYiIgc3Ryb2tlLXdpZHRoPSIzIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KPC9zdmc+Cg==", alt: "Illustration of Mira looking toward a hopeful horizon", caption: "Right now, she is waiting for a matching blood stem cell donor." }
+];
+
+const screens = {
+  story: document.getElementById("story-screen"),
+  choice: document.getElementById("choice-screen")
+};
+
+const art = document.getElementById("story-art");
+const caption = document.getElementById("scene-caption");
+const progress = document.getElementById("story-progress");
+const progressFill = document.getElementById("progress-fill");
+const elapsedTime = document.getElementById("elapsed-time");
+const remainingTime = document.getElementById("remaining-time");
+const playPause = document.getElementById("play-pause");
+const playPauseIcon = document.getElementById("play-pause-icon");
+const continueStory = document.getElementById("continue-story");
+const skipStory = document.getElementById("skip-story");
+const emailForm = document.getElementById("email-form");
+const emailInput = document.getElementById("email");
+const emailError = document.getElementById("email-error");
+const emailSubmit = document.getElementById("email-submit");
+const emailResult = document.getElementById("email-result");
+
+let currentScreen = "story";
+let elapsed = 0;
+let playing = true;
+let completed = false;
+let lastTick = performance.now();
+let submitTimer;
+
+function showScreen(name) {
+  currentScreen = name;
+  Object.entries(screens).forEach(([key, element]) => { element.hidden = key !== name; });
+  window.scrollTo({ top: 0, behavior: "auto" });
+  const heading = screens[name].querySelector("h1");
+  if (heading) {
+    heading.setAttribute("tabindex", "-1");
+    heading.focus({ preventScroll: true });
+  }
+}
+
+function renderStory() {
+  const wholeSeconds = Math.min(STORY_LENGTH, Math.floor(elapsed));
+  const sceneIndex = Math.min(2, Math.floor(wholeSeconds / 10));
+  const scene = scenes[sceneIndex];
+  if (art.getAttribute("src") !== scene.image) {
+    art.src = scene.image;
+    art.alt = scene.alt;
+    caption.textContent = scene.caption;
+  }
+  progress.setAttribute("aria-valuenow", String(wholeSeconds));
+  progressFill.style.width = `${(elapsed / STORY_LENGTH) * 100}%`;
+  elapsedTime.textContent = `0:${String(wholeSeconds).padStart(2, "0")}`;
+  remainingTime.textContent = completed ? "Story complete" : `0:${String(STORY_LENGTH - wholeSeconds).padStart(2, "0")} left`;
+  playPause.hidden = completed;
+  playPauseIcon.textContent = playing ? "Ⅱ" : "▶";
+  playPause.setAttribute("aria-label", playing ? "Pause story" : "Play story");
+  playPause.title = playing ? "Pause story" : "Play story";
+  continueStory.hidden = !completed;
+  skipStory.hidden = completed;
+}
+
+function tick(now) {
+  const delta = Math.min((now - lastTick) / 1000, 0.25);
+  lastTick = now;
+  if (currentScreen === "story" && playing && !completed && !document.hidden) {
+    elapsed = Math.min(STORY_LENGTH, elapsed + delta);
+    if (elapsed >= STORY_LENGTH) {
+      completed = true;
+      playing = false;
+    }
+    renderStory();
+  }
+  requestAnimationFrame(tick);
+}
+
+function restart() {
+  clearTimeout(submitTimer);
+  elapsed = 0;
+  playing = true;
+  completed = false;
+  emailInput.value = "";
+  emailInput.removeAttribute("aria-invalid");
+  emailError.hidden = true;
+  emailForm.hidden = false;
+  emailResult.hidden = true;
+  emailSubmit.disabled = false;
+  emailSubmit.innerHTML = 'KEEP ME INFORMED <span aria-hidden="true">→</span>';
+  art.src = scenes[0].image;
+  art.alt = scenes[0].alt;
+  caption.textContent = scenes[0].caption;
+  renderStory();
+  showScreen("story");
+}
+
+function validateEmail(value) {
+  const email = value.trim();
+  return email.length <= 254 && /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email);
+}
+
+playPause.addEventListener("click", () => { playing = !playing; renderStory(); });
+continueStory.addEventListener("click", () => showScreen("choice"));
+skipStory.addEventListener("click", () => { playing = false; renderStory(); showScreen("choice"); });
+document.getElementById("choice-back").addEventListener("click", restart);
+
+emailInput.addEventListener("input", () => {
+  if (!emailError.hidden) {
+    emailError.hidden = true;
+    emailInput.removeAttribute("aria-invalid");
+  }
+});
+
+emailForm.addEventListener("submit", event => {
+  event.preventDefault();
+  if (!validateEmail(emailInput.value)) {
+    emailError.textContent = emailInput.value.trim() ? "Please enter a valid email address." : "Please enter your email address.";
+    emailError.hidden = false;
+    emailInput.setAttribute("aria-invalid", "true");
+    emailInput.focus();
+    return;
+  }
+  emailError.hidden = true;
+  emailInput.removeAttribute("aria-invalid");
+  emailSubmit.disabled = true;
+  emailSubmit.textContent = "SUBMITTING…";
+  // Prototype only: no request, storage, analytics, or logging of the entered address.
+  submitTimer = setTimeout(() => {
+    emailInput.value = "";
+    emailForm.hidden = true;
+    emailResult.hidden = false;
+    emailResult.focus({ preventScroll: true });
+  }, 900);
+});
+
+document.addEventListener("visibilitychange", () => { lastTick = performance.now(); });
+renderStory();
+requestAnimationFrame(tick);
+
+</script>
+  </head>
+  <body>
+    <main class="app-shell" id="app">
+      <header class="topbar">
+        <div class="brand" aria-label="Press and NMDP concept partnership">
+          <span class="brand__press">press<span class="brand__period">.</span></span>
+          <span class="brand__cross" aria-hidden="true">×</span>
+          <span class="brand__nmdp">NMDP</span>
+        </div>
+      </header>
+
+      <section class="screen screen--story" id="story-screen" aria-labelledby="story-heading">
+        <div class="story-intro">
+          <p class="eyebrow"><span class="eyebrow__line"></span>A 30-SECOND STORY</p>
+          <h1 id="story-heading">Your drink is being made.<br /><em>Meet someone waiting, too.</em></h1>
+        </div>
+
+        <div class="story-player" aria-label="Fictional 30-second patient storyboard">
+          <div class="story-frame" id="story-frame">
+            <img id="story-art" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0MDAgMzgwIiByb2xlPSJpbWciIGFyaWEtbGFiZWxsZWRieT0idGl0bGUiPgogIDx0aXRsZSBpZD0idGl0bGUiPkZpY3Rpb25hbCBNaXJhIHNrZXRjaGVzIGF0IGEgY2FmZTwvdGl0bGU+CiAgPHJlY3Qgd2lkdGg9IjQwMCIgaGVpZ2h0PSIzODAiIGZpbGw9IiNmNmRjZTgiLz4KICA8cGF0aCBkPSJNMjQgNzRjMzgtMzMgMTAyLTQ2IDE2Ni0yNiA2MiAxOSAxMTUgMTAgMTgwLTIxdjMwNkgyMFoiIGZpbGw9IiNmM2JhY2UiLz4KICA8cGF0aCBkPSJNMTggMjk2YzcwLTMwIDE0OS0yNCAyMDgtOCA1OSAxNSAxMTggOCAxNzQtMTN2MTA1SDB2LTc0WiIgZmlsbD0iI2Q5YzRlZiIvPgogIDxwYXRoIGQ9Ik0zMDggNTVjMTAtMjAgMjQtMTAgMTggN00zMzEgNjJjMjAtMTIgMjcgMiAxNiAxNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMjQyNDJiIiBzdHJva2Utd2lkdGg9IjMiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgogIDxjaXJjbGUgY3g9IjcwIiBjeT0iMTMyIiByPSIzMSIgZmlsbD0iI2ZkZjZkZSIgc3Ryb2tlPSIjMjQyNDJiIiBzdHJva2Utd2lkdGg9IjMiLz4KICA8cGF0aCBkPSJNNTIgMTMyYzYtOSAxMi0xMCAxOC0xIDctOSAxMy04IDIwIDFNNDUgMTYzaDQ4IiBmaWxsPSJub25lIiBzdHJva2U9IiNlOTAwNzkiIHN0cm9rZS13aWR0aD0iMyIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgPHBhdGggZD0iTTExMyAzMzZjMTctNzUgNDYtMTEzIDEwOC0xMTYgNTctMyA4OSA0MSA5NiAxMTZaIiBmaWxsPSIjNmM1OGFjIiBzdHJva2U9IiMyNDI0MmIiIHN0cm9rZS13aWR0aD0iNCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPgogIDxwYXRoIGQ9Ik0xNTUgMjQ5YzQtMzkgOC04MSA0NS0xMDAgMzQtMTcgNjYgOCA3MiA0OGwtMTUgNDAtNjcgMjdaIiBmaWxsPSIjMzAyYzNhIiBzdHJva2U9IiMyNDI0MmIiIHN0cm9rZS13aWR0aD0iNCIvPgogIDxwYXRoIGQ9Ik0xNzkgMTgzYy0zIDI1LTMgNTcgMTIgNzMgMTIgMTMgMzkgMTggNTYgMyAxOC0xNyAyNC00MiAyMi02OC0yMyA3LTUxLTItNjQtMTgtOCA4LTE3IDEyLTI2IDEwWiIgZmlsbD0iI2M3OGQ3MiIgc3Ryb2tlPSIjMjQyNDJiIiBzdHJva2Utd2lkdGg9IjMiLz4KICA8cGF0aCBkPSJNMTgxIDE4OGMtNS0yMSAxMi00NiAzMC00NyAyOC0xNyA1NSA0IDYxIDI0IDExIDI1LTQgMzktNCAzOS04LTIxLTI1LTM4LTM5LTQwLTE2IDIwLTM2IDI1LTQ4IDI0WiIgZmlsbD0iIzMwMmMzYSIgc3Ryb2tlPSIjMjQyNDJiIiBzdHJva2Utd2lkdGg9IjMiLz4KICA8cGF0aCBkPSJNMjA5IDIxOGwyIDFtMzQtNSAyIDEiIHN0cm9rZT0iIzI0MjQyYiIgc3Ryb2tlLXdpZHRoPSI1IiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KICA8cGF0aCBkPSJNMjIzIDIzOWM3IDUgMTQgNCAyMC0yIiBmaWxsPSJub25lIiBzdHJva2U9IiM3MTJlNDkiIHN0cm9rZS13aWR0aD0iMyIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgPHBhdGggZD0iTTE0NiAyOTRjLTE1LTYtMjcgMC0zNiAxNmwtMTQgMjYgMzIgMTQgMjgtMzZtMTU0LTI2YzE3IDEgMjUgMTMgMzQgMzBsLTEzIDE5LTMzLTExIiBmaWxsPSIjNmM1OGFjIiBzdHJva2U9IiMyNDI0MmIiIHN0cm9rZS13aWR0aD0iNCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPgogIDxwYXRoIGQ9Ik0yNyAzMjljNzYtMjMgMTYyLTE4IDIyNy02IDQ2IDkgOTIgMTEgMTQ2LTF2NThIMHYtNDNaIiBmaWxsPSIjZmZmZWZhIiBzdHJva2U9IiMyNDI0MmIiIHN0cm9rZS13aWR0aD0iNCIvPgogIDxwYXRoIGQ9Ik0xMTAgMzEzbDExNy04IDMwIDU3LTEyNiAxWiIgZmlsbD0iI2ZmZjRkNSIgc3Ryb2tlPSIjMjQyNDJiIiBzdHJva2Utd2lkdGg9IjQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz4KICA8cGF0aCBkPSJNMTQwIDMyOGMxNC04IDI0LTQgMzAgNyAxMi0xMiAyOC0xMSA0MSAwbS00OSAxOGMyMC0xMCA0MC05IDU4IDEiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2U5MDA3OSIgc3Ryb2tlLXdpZHRoPSIzIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KICA8cGF0aCBkPSJNMzEwIDMyMmgzNmwtNSAzOGgtMjVaIiBmaWxsPSIjZDdmM2VlIiBzdHJva2U9IiMyNDI0MmIiIHN0cm9rZS13aWR0aD0iMyIvPgogIDxwYXRoIGQ9Ik0zMTEgMzIyaDM0bS0yNy04Yy01LTkgMy0xMiA0LTIxbTkgMTljLTUtMTEgMy0xMyAzLTIzIiBmaWxsPSJub25lIiBzdHJva2U9IiMyNDI0MmIiIHN0cm9rZS13aWR0aD0iMyIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgPHBhdGggZD0iTTIwIDU3bDEyLTdtMSAyNSA5IDNtMzIwIDExNSAxMyA1bS0xMyAxMyAxMSAxMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZTkwMDc5IiBzdHJva2Utd2lkdGg9IjQiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgo8L3N2Zz4K" alt="Illustration of fictional Mira sketching at a cafe" />
+            <div class="story-frame__caption" aria-live="polite">
+              <span id="scene-caption">Mira loves sketching the little moments around her.</span>
+            </div>
+          </div>
+          <div class="player-meta">
+            <div>
+              <h2>Meet Mira <span class="fictional-label">(fictional)</span></h2>
+              <p>She is waiting for a matching blood stem cell donor.</p>
+            </div>
+            <button class="icon-button" type="button" id="play-pause" aria-label="Pause story" title="Pause story">
+              <span id="play-pause-icon" aria-hidden="true">Ⅱ</span>
+            </button>
+          </div>
+          <div class="progress-block">
+            <div class="progress-track" role="progressbar" aria-label="Story progress" aria-valuemin="0" aria-valuemax="30" aria-valuenow="0" id="story-progress">
+              <span class="progress-fill" id="progress-fill"></span>
+            </div>
+            <div class="time-row"><span id="elapsed-time">0:00</span><span id="remaining-time">0:30 left</span></div>
+          </div>
+        </div>
+
+        <div class="story-actions">
+          <button class="button button--pink" type="button" id="continue-story" hidden>CONTINUE <span aria-hidden="true">→</span></button>
+          <button class="text-button" type="button" id="skip-story">Skip story <span aria-hidden="true">→</span></button>
+        </div>
+      </section>
+
+      <section class="screen screen--choice" id="choice-screen" aria-labelledby="choice-heading" hidden>
+        <button class="back-button" type="button" id="choice-back"><span aria-hidden="true">←</span> Replay story</button>
+        <h1 id="choice-heading">Leave your email.</h1>
+
+        <form id="email-form" novalidate>
+          <label for="email">Email address</label>
+          <input id="email" name="email" type="email" inputmode="email" autocomplete="email" placeholder="you@example.com" aria-describedby="email-error" required />
+          <p class="error-message" id="email-error" role="alert" hidden></p>
+          <button class="button button--pink" type="submit" id="email-submit">KEEP ME INFORMED <span aria-hidden="true">→</span></button>
+        </form>
+        <p class="email-result" id="email-result" role="status" tabindex="-1" hidden>Done. No email was sent.</p>
+
+        <div class="divider"><span>OR</span></div>
+        <a class="button button--outline" href="https://www.nmdp.org/get-involved/join-the-registry" target="_blank" rel="noopener noreferrer" id="official-link" aria-label="Continue to the official NMDP website, opens in a new tab">CONTINUE TO NMDP <span aria-hidden="true">↗</span></a>
+      </section>
+    </main>
+  </body>
+</html>
