@@ -112,7 +112,71 @@ form .button { margin-top: 12px; }
 }
 
 </style>
-    <script defer>
+    
+  </head>
+  <body>
+    <main class="app-shell" id="app">
+      <header class="topbar">
+        <div class="brand" aria-label="Press and NMDP concept partnership">
+          <span class="brand__press">press<span class="brand__period">.</span></span>
+          <span class="brand__cross" aria-hidden="true">×</span>
+          <span class="brand__nmdp">NMDP</span>
+        </div>
+      </header>
+
+      <section class="screen screen--story" id="story-screen" aria-labelledby="story-heading">
+        <div class="story-intro">
+          <p class="eyebrow"><span class="eyebrow__line"></span>A 30-SECOND STORY</p>
+          <h1 id="story-heading">Your drink is being made.<br /><em>Meet someone waiting, too.</em></h1>
+        </div>
+
+        <div class="story-player" aria-label="Fictional 30-second patient storyboard">
+          <div class="story-frame" id="story-frame">
+            <img id="story-art" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0MDAgMzgwIiByb2xlPSJpbWciIGFyaWEtbGFiZWxsZWRieT0idGl0bGUiPgogIDx0aXRsZSBpZD0idGl0bGUiPkZpY3Rpb25hbCBNaXJhIHNrZXRjaGVzIGF0IGEgY2FmZTwvdGl0bGU+CiAgPHJlY3Qgd2lkdGg9IjQwMCIgaGVpZ2h0PSIzODAiIGZpbGw9IiNmNmRjZTgiLz4KICA8cGF0aCBkPSJNMjQgNzRjMzgtMzMgMTAyLTQ2IDE2Ni0yNiA2MiAxOSAxMTUgMTAgMTgwLTIxdjMwNkgyMFoiIGZpbGw9IiNmM2JhY2UiLz4KICA8cGF0aCBkPSJNMTggMjk2YzcwLTMwIDE0OS0yNCAyMDgtOCA1OSAxNSAxMTggOCAxNzQtMTN2MTA1SDB2LTc0WiIgZmlsbD0iI2Q5YzRlZiIvPgogIDxwYXRoIGQ9Ik0zMDggNTVjMTAtMjAgMjQtMTAgMTggN00zMzEgNjJjMjAtMTIgMjcgMiAxNiAxNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMjQyNDJiIiBzdHJva2Utd2lkdGg9IjMiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgogIDxjaXJjbGUgY3g9IjcwIiBjeT0iMTMyIiByPSIzMSIgZmlsbD0iI2ZkZjZkZSIgc3Ryb2tlPSIjMjQyNDJiIiBzdHJva2Utd2lkdGg9IjMiLz4KICA8cGF0aCBkPSJNNTIgMTMyYzYtOSAxMi0xMCAxOC0xIDctOSAxMy04IDIwIDFNNDUgMTYzaDQ4IiBmaWxsPSJub25lIiBzdHJva2U9IiNlOTAwNzkiIHN0cm9rZS13aWR0aD0iMyIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgPHBhdGggZD0iTTExMyAzMzZjMTctNzUgNDYtMTEzIDEwOC0xMTYgNTctMyA4OSA0MSA5NiAxMTZaIiBmaWxsPSIjNmM1OGFjIiBzdHJva2U9IiMyNDI0MmIiIHN0cm9rZS13aWR0aD0iNCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPgogIDxwYXRoIGQ9Ik0xNTUgMjQ5YzQtMzkgOC04MSA0NS0xMDAgMzQtMTcgNjYgOCA3MiA0OGwtMTUgNDAtNjcgMjdaIiBmaWxsPSIjMzAyYzNhIiBzdHJva2U9IiMyNDI0MmIiIHN0cm9rZS13aWR0aD0iNCIvPgogIDxwYXRoIGQ9Ik0xNzkgMTgzYy0zIDI1LTMgNTcgMTIgNzMgMTIgMTMgMzkgMTggNTYgMyAxOC0xNyAyNC00MiAyMi02OC0yMyA3LTUxLTItNjQtMTgtOCA4LTE3IDEyLTI2IDEwWiIgZmlsbD0iI2M3OGQ3MiIgc3Ryb2tlPSIjMjQyNDJiIiBzdHJva2Utd2lkdGg9IjMiLz4KICA8cGF0aCBkPSJNMTgxIDE4OGMtNS0yMSAxMi00NiAzMC00NyAyOC0xNyA1NSA0IDYxIDI0IDExIDI1LTQgMzktNCAzOS04LTIxLTI1LTM4LTM5LTQwLTE2IDIwLTM2IDI1LTQ4IDI0WiIgZmlsbD0iIzMwMmMzYSIgc3Ryb2tlPSIjMjQyNDJiIiBzdHJva2Utd2lkdGg9IjMiLz4KICA8cGF0aCBkPSJNMjA5IDIxOGwyIDFtMzQtNSAyIDEiIHN0cm9rZT0iIzI0MjQyYiIgc3Ryb2tlLXdpZHRoPSI1IiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KICA8cGF0aCBkPSJNMjIzIDIzOWM3IDUgMTQgNCAyMC0yIiBmaWxsPSJub25lIiBzdHJva2U9IiM3MTJlNDkiIHN0cm9rZS13aWR0aD0iMyIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgPHBhdGggZD0iTTE0NiAyOTRjLTE1LTYtMjcgMC0zNiAxNmwtMTQgMjYgMzIgMTQgMjgtMzZtMTU0LTI2YzE3IDEgMjUgMTMgMzQgMzBsLTEzIDE5LTMzLTExIiBmaWxsPSIjNmM1OGFjIiBzdHJva2U9IiMyNDI0MmIiIHN0cm9rZS13aWR0aD0iNCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPgogIDxwYXRoIGQ9Ik0yNyAzMjljNzYtMjMgMTYyLTE4IDIyNy02IDQ2IDkgOTIgMTEgMTQ2LTF2NThIMHYtNDNaIiBmaWxsPSIjZmZmZWZhIiBzdHJva2U9IiMyNDI0MmIiIHN0cm9rZS13aWR0aD0iNCIvPgogIDxwYXRoIGQ9Ik0xMTAgMzEzbDExNy04IDMwIDU3LTEyNiAxWiIgZmlsbD0iI2ZmZjRkNSIgc3Ryb2tlPSIjMjQyNDJiIiBzdHJva2Utd2lkdGg9IjQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz4KICA8cGF0aCBkPSJNMTQwIDMyOGMxNC04IDI0LTQgMzAgNyAxMi0xMiAyOC0xMSA0MSAwbS00OSAxOGMyMC0xMCA0MC05IDU4IDEiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2U5MDA3OSIgc3Ryb2tlLXdpZHRoPSIzIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KICA8cGF0aCBkPSJNMzEwIDMyMmgzNmwtNSAzOGgtMjVaIiBmaWxsPSIjZDdmM2VlIiBzdHJva2U9IiMyNDI0MmIiIHN0cm9rZS13aWR0aD0iMyIvPgogIDxwYXRoIGQ9Ik0zMTEgMzIyaDM0bS0yNy04Yy01LTkgMy0xMiA0LTIxbTkgMTljLTUtMTEgMy0xMyAzLTIzIiBmaWxsPSJub25lIiBzdHJva2U9IiMyNDI0MmIiIHN0cm9rZS13aWR0aD0iMyIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgPHBhdGggZD0iTTIwIDU3bDEyLTdtMSAyNSA5IDNtMzIwIDExNSAxMyA1bS0xMyAxMyAxMSAxMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZTkwMDc5IiBzdHJva2Utd2lkdGg9IjQiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgo8L3N2Zz4K" alt="Illustration of fictional Mira sketching at a cafe" />
+            <div class="story-frame__caption" aria-live="polite">
+              <span id="scene-caption">Mira loves sketching the little moments around her.</span>
+            </div>
+          </div>
+          <div class="player-meta">
+            <div>
+              <h2>Meet Mira <span class="fictional-label">(fictional)</span></h2>
+              <p>She is waiting for a matching blood stem cell donor.</p>
+            </div>
+            <button class="icon-button" type="button" id="play-pause" aria-label="Pause story" title="Pause story">
+              <span id="play-pause-icon" aria-hidden="true">Ⅱ</span>
+            </button>
+          </div>
+          <div class="progress-block">
+            <div class="progress-track" role="progressbar" aria-label="Story progress" aria-valuemin="0" aria-valuemax="30" aria-valuenow="0" id="story-progress">
+              <span class="progress-fill" id="progress-fill"></span>
+            </div>
+            <div class="time-row"><span id="elapsed-time">0:00</span><span id="remaining-time">0:30 left</span></div>
+          </div>
+        </div>
+
+        <div class="story-actions">
+          <button class="button button--pink" type="button" id="continue-story" hidden>CONTINUE <span aria-hidden="true">→</span></button>
+          <button class="text-button" type="button" id="skip-story">Skip story <span aria-hidden="true">→</span></button>
+        </div>
+      </section>
+
+      <section class="screen screen--choice" id="choice-screen" aria-labelledby="choice-heading" hidden>
+        <button class="back-button" type="button" id="choice-back"><span aria-hidden="true">←</span> Replay story</button>
+        <h1 id="choice-heading">Leave your email.</h1>
+
+        <form id="email-form" novalidate>
+          <label for="email">Email address</label>
+          <input id="email" name="email" type="email" inputmode="email" autocomplete="email" placeholder="you@example.com" aria-describedby="email-error" required />
+          <p class="error-message" id="email-error" role="alert" hidden></p>
+          <button class="button button--pink" type="submit" id="email-submit">KEEP ME INFORMED <span aria-hidden="true">→</span></button>
+        </form>
+        <p class="email-result" id="email-result" role="status" tabindex="-1" hidden>Done. No email was sent.</p>
+
+        <div class="divider"><span>OR</span></div>
+        <a class="button button--outline" href="https://www.nmdp.org/get-involved/join-the-registry" target="_blank" rel="noopener noreferrer" id="official-link" aria-label="Continue to the official NMDP website, opens in a new tab">CONTINUE TO NMDP <span aria-hidden="true">↗</span></a>
+      </section>
+    </main>
+  <script>
 const STORY_LENGTH = 30;
 const scenes = [
   { start: 0, image: "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0MDAgMzgwIiByb2xlPSJpbWciIGFyaWEtbGFiZWxsZWRieT0idGl0bGUiPgogIDx0aXRsZSBpZD0idGl0bGUiPkZpY3Rpb25hbCBNaXJhIHNrZXRjaGVzIGF0IGEgY2FmZTwvdGl0bGU+CiAgPHJlY3Qgd2lkdGg9IjQwMCIgaGVpZ2h0PSIzODAiIGZpbGw9IiNmNmRjZTgiLz4KICA8cGF0aCBkPSJNMjQgNzRjMzgtMzMgMTAyLTQ2IDE2Ni0yNiA2MiAxOSAxMTUgMTAgMTgwLTIxdjMwNkgyMFoiIGZpbGw9IiNmM2JhY2UiLz4KICA8cGF0aCBkPSJNMTggMjk2YzcwLTMwIDE0OS0yNCAyMDgtOCA1OSAxNSAxMTggOCAxNzQtMTN2MTA1SDB2LTc0WiIgZmlsbD0iI2Q5YzRlZiIvPgogIDxwYXRoIGQ9Ik0zMDggNTVjMTAtMjAgMjQtMTAgMTggN00zMzEgNjJjMjAtMTIgMjcgMiAxNiAxNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMjQyNDJiIiBzdHJva2Utd2lkdGg9IjMiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgogIDxjaXJjbGUgY3g9IjcwIiBjeT0iMTMyIiByPSIzMSIgZmlsbD0iI2ZkZjZkZSIgc3Ryb2tlPSIjMjQyNDJiIiBzdHJva2Utd2lkdGg9IjMiLz4KICA8cGF0aCBkPSJNNTIgMTMyYzYtOSAxMi0xMCAxOC0xIDctOSAxMy04IDIwIDFNNDUgMTYzaDQ4IiBmaWxsPSJub25lIiBzdHJva2U9IiNlOTAwNzkiIHN0cm9rZS13aWR0aD0iMyIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgPHBhdGggZD0iTTExMyAzMzZjMTctNzUgNDYtMTEzIDEwOC0xMTYgNTctMyA4OSA0MSA5NiAxMTZaIiBmaWxsPSIjNmM1OGFjIiBzdHJva2U9IiMyNDI0MmIiIHN0cm9rZS13aWR0aD0iNCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPgogIDxwYXRoIGQ9Ik0xNTUgMjQ5YzQtMzkgOC04MSA0NS0xMDAgMzQtMTcgNjYgOCA3MiA0OGwtMTUgNDAtNjcgMjdaIiBmaWxsPSIjMzAyYzNhIiBzdHJva2U9IiMyNDI0MmIiIHN0cm9rZS13aWR0aD0iNCIvPgogIDxwYXRoIGQ9Ik0xNzkgMTgzYy0zIDI1LTMgNTcgMTIgNzMgMTIgMTMgMzkgMTggNTYgMyAxOC0xNyAyNC00MiAyMi02OC0yMyA3LTUxLTItNjQtMTgtOCA4LTE3IDEyLTI2IDEwWiIgZmlsbD0iI2M3OGQ3MiIgc3Ryb2tlPSIjMjQyNDJiIiBzdHJva2Utd2lkdGg9IjMiLz4KICA8cGF0aCBkPSJNMTgxIDE4OGMtNS0yMSAxMi00NiAzMC00NyAyOC0xNyA1NSA0IDYxIDI0IDExIDI1LTQgMzktNCAzOS04LTIxLTI1LTM4LTM5LTQwLTE2IDIwLTM2IDI1LTQ4IDI0WiIgZmlsbD0iIzMwMmMzYSIgc3Ryb2tlPSIjMjQyNDJiIiBzdHJva2Utd2lkdGg9IjMiLz4KICA8cGF0aCBkPSJNMjA5IDIxOGwyIDFtMzQtNSAyIDEiIHN0cm9rZT0iIzI0MjQyYiIgc3Ryb2tlLXdpZHRoPSI1IiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KICA8cGF0aCBkPSJNMjIzIDIzOWM3IDUgMTQgNCAyMC0yIiBmaWxsPSJub25lIiBzdHJva2U9IiM3MTJlNDkiIHN0cm9rZS13aWR0aD0iMyIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgPHBhdGggZD0iTTE0NiAyOTRjLTE1LTYtMjcgMC0zNiAxNmwtMTQgMjYgMzIgMTQgMjgtMzZtMTU0LTI2YzE3IDEgMjUgMTMgMzQgMzBsLTEzIDE5LTMzLTExIiBmaWxsPSIjNmM1OGFjIiBzdHJva2U9IiMyNDI0MmIiIHN0cm9rZS13aWR0aD0iNCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPgogIDxwYXRoIGQ9Ik0yNyAzMjljNzYtMjMgMTYyLTE4IDIyNy02IDQ2IDkgOTIgMTEgMTQ2LTF2NThIMHYtNDNaIiBmaWxsPSIjZmZmZWZhIiBzdHJva2U9IiMyNDI0MmIiIHN0cm9rZS13aWR0aD0iNCIvPgogIDxwYXRoIGQ9Ik0xMTAgMzEzbDExNy04IDMwIDU3LTEyNiAxWiIgZmlsbD0iI2ZmZjRkNSIgc3Ryb2tlPSIjMjQyNDJiIiBzdHJva2Utd2lkdGg9IjQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz4KICA8cGF0aCBkPSJNMTQwIDMyOGMxNC04IDI0LTQgMzAgNyAxMi0xMiAyOC0xMSA0MSAwbS00OSAxOGMyMC0xMCA0MC05IDU4IDEiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2U5MDA3OSIgc3Ryb2tlLXdpZHRoPSIzIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KICA8cGF0aCBkPSJNMzEwIDMyMmgzNmwtNSAzOGgtMjVaIiBmaWxsPSIjZDdmM2VlIiBzdHJva2U9IiMyNDI0MmIiIHN0cm9rZS13aWR0aD0iMyIvPgogIDxwYXRoIGQ9Ik0zMTEgMzIyaDM0bS0yNy04Yy01LTkgMy0xMiA0LTIxbTkgMTljLTUtMTEgMy0xMyAzLTIzIiBmaWxsPSJub25lIiBzdHJva2U9IiMyNDI0MmIiIHN0cm9rZS13aWR0aD0iMyIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgPHBhdGggZD0iTTIwIDU3bDEyLTdtMSAyNSA5IDNtMzIwIDExNSAxMyA1bS0xMyAxMyAxMSAxMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZTkwMDc5IiBzdHJva2Utd2lkdGg9IjQiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgo8L3N2Zz4K", alt: "Illustration of fictional Mira sketching at a cafe", caption: "Mira loves sketching the little moments around her." },
@@ -257,68 +321,5 @@ renderStory();
 requestAnimationFrame(tick);
 
 </script>
-  </head>
-  <body>
-    <main class="app-shell" id="app">
-      <header class="topbar">
-        <div class="brand" aria-label="Press and NMDP concept partnership">
-          <span class="brand__press">press<span class="brand__period">.</span></span>
-          <span class="brand__cross" aria-hidden="true">×</span>
-          <span class="brand__nmdp">NMDP</span>
-        </div>
-      </header>
-
-      <section class="screen screen--story" id="story-screen" aria-labelledby="story-heading">
-        <div class="story-intro">
-          <p class="eyebrow"><span class="eyebrow__line"></span>A 30-SECOND STORY</p>
-          <h1 id="story-heading">Your drink is being made.<br /><em>Meet someone waiting, too.</em></h1>
-        </div>
-
-        <div class="story-player" aria-label="Fictional 30-second patient storyboard">
-          <div class="story-frame" id="story-frame">
-            <img id="story-art" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0MDAgMzgwIiByb2xlPSJpbWciIGFyaWEtbGFiZWxsZWRieT0idGl0bGUiPgogIDx0aXRsZSBpZD0idGl0bGUiPkZpY3Rpb25hbCBNaXJhIHNrZXRjaGVzIGF0IGEgY2FmZTwvdGl0bGU+CiAgPHJlY3Qgd2lkdGg9IjQwMCIgaGVpZ2h0PSIzODAiIGZpbGw9IiNmNmRjZTgiLz4KICA8cGF0aCBkPSJNMjQgNzRjMzgtMzMgMTAyLTQ2IDE2Ni0yNiA2MiAxOSAxMTUgMTAgMTgwLTIxdjMwNkgyMFoiIGZpbGw9IiNmM2JhY2UiLz4KICA8cGF0aCBkPSJNMTggMjk2YzcwLTMwIDE0OS0yNCAyMDgtOCA1OSAxNSAxMTggOCAxNzQtMTN2MTA1SDB2LTc0WiIgZmlsbD0iI2Q5YzRlZiIvPgogIDxwYXRoIGQ9Ik0zMDggNTVjMTAtMjAgMjQtMTAgMTggN00zMzEgNjJjMjAtMTIgMjcgMiAxNiAxNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMjQyNDJiIiBzdHJva2Utd2lkdGg9IjMiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgogIDxjaXJjbGUgY3g9IjcwIiBjeT0iMTMyIiByPSIzMSIgZmlsbD0iI2ZkZjZkZSIgc3Ryb2tlPSIjMjQyNDJiIiBzdHJva2Utd2lkdGg9IjMiLz4KICA8cGF0aCBkPSJNNTIgMTMyYzYtOSAxMi0xMCAxOC0xIDctOSAxMy04IDIwIDFNNDUgMTYzaDQ4IiBmaWxsPSJub25lIiBzdHJva2U9IiNlOTAwNzkiIHN0cm9rZS13aWR0aD0iMyIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgPHBhdGggZD0iTTExMyAzMzZjMTctNzUgNDYtMTEzIDEwOC0xMTYgNTctMyA4OSA0MSA5NiAxMTZaIiBmaWxsPSIjNmM1OGFjIiBzdHJva2U9IiMyNDI0MmIiIHN0cm9rZS13aWR0aD0iNCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPgogIDxwYXRoIGQ9Ik0xNTUgMjQ5YzQtMzkgOC04MSA0NS0xMDAgMzQtMTcgNjYgOCA3MiA0OGwtMTUgNDAtNjcgMjdaIiBmaWxsPSIjMzAyYzNhIiBzdHJva2U9IiMyNDI0MmIiIHN0cm9rZS13aWR0aD0iNCIvPgogIDxwYXRoIGQ9Ik0xNzkgMTgzYy0zIDI1LTMgNTcgMTIgNzMgMTIgMTMgMzkgMTggNTYgMyAxOC0xNyAyNC00MiAyMi02OC0yMyA3LTUxLTItNjQtMTgtOCA4LTE3IDEyLTI2IDEwWiIgZmlsbD0iI2M3OGQ3MiIgc3Ryb2tlPSIjMjQyNDJiIiBzdHJva2Utd2lkdGg9IjMiLz4KICA8cGF0aCBkPSJNMTgxIDE4OGMtNS0yMSAxMi00NiAzMC00NyAyOC0xNyA1NSA0IDYxIDI0IDExIDI1LTQgMzktNCAzOS04LTIxLTI1LTM4LTM5LTQwLTE2IDIwLTM2IDI1LTQ4IDI0WiIgZmlsbD0iIzMwMmMzYSIgc3Ryb2tlPSIjMjQyNDJiIiBzdHJva2Utd2lkdGg9IjMiLz4KICA8cGF0aCBkPSJNMjA5IDIxOGwyIDFtMzQtNSAyIDEiIHN0cm9rZT0iIzI0MjQyYiIgc3Ryb2tlLXdpZHRoPSI1IiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KICA8cGF0aCBkPSJNMjIzIDIzOWM3IDUgMTQgNCAyMC0yIiBmaWxsPSJub25lIiBzdHJva2U9IiM3MTJlNDkiIHN0cm9rZS13aWR0aD0iMyIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgPHBhdGggZD0iTTE0NiAyOTRjLTE1LTYtMjcgMC0zNiAxNmwtMTQgMjYgMzIgMTQgMjgtMzZtMTU0LTI2YzE3IDEgMjUgMTMgMzQgMzBsLTEzIDE5LTMzLTExIiBmaWxsPSIjNmM1OGFjIiBzdHJva2U9IiMyNDI0MmIiIHN0cm9rZS13aWR0aD0iNCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPgogIDxwYXRoIGQ9Ik0yNyAzMjljNzYtMjMgMTYyLTE4IDIyNy02IDQ2IDkgOTIgMTEgMTQ2LTF2NThIMHYtNDNaIiBmaWxsPSIjZmZmZWZhIiBzdHJva2U9IiMyNDI0MmIiIHN0cm9rZS13aWR0aD0iNCIvPgogIDxwYXRoIGQ9Ik0xMTAgMzEzbDExNy04IDMwIDU3LTEyNiAxWiIgZmlsbD0iI2ZmZjRkNSIgc3Ryb2tlPSIjMjQyNDJiIiBzdHJva2Utd2lkdGg9IjQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz4KICA8cGF0aCBkPSJNMTQwIDMyOGMxNC04IDI0LTQgMzAgNyAxMi0xMiAyOC0xMSA0MSAwbS00OSAxOGMyMC0xMCA0MC05IDU4IDEiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2U5MDA3OSIgc3Ryb2tlLXdpZHRoPSIzIiBzdHJva2UtbGluZWNhcD0icm91bmQiLz4KICA8cGF0aCBkPSJNMzEwIDMyMmgzNmwtNSAzOGgtMjVaIiBmaWxsPSIjZDdmM2VlIiBzdHJva2U9IiMyNDI0MmIiIHN0cm9rZS13aWR0aD0iMyIvPgogIDxwYXRoIGQ9Ik0zMTEgMzIyaDM0bS0yNy04Yy01LTkgMy0xMiA0LTIxbTkgMTljLTUtMTEgMy0xMyAzLTIzIiBmaWxsPSJub25lIiBzdHJva2U9IiMyNDI0MmIiIHN0cm9rZS13aWR0aD0iMyIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+CiAgPHBhdGggZD0iTTIwIDU3bDEyLTdtMSAyNSA5IDNtMzIwIDExNSAxMyA1bS0xMyAxMyAxMSAxMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZTkwMDc5IiBzdHJva2Utd2lkdGg9IjQiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIvPgo8L3N2Zz4K" alt="Illustration of fictional Mira sketching at a cafe" />
-            <div class="story-frame__caption" aria-live="polite">
-              <span id="scene-caption">Mira loves sketching the little moments around her.</span>
-            </div>
-          </div>
-          <div class="player-meta">
-            <div>
-              <h2>Meet Mira <span class="fictional-label">(fictional)</span></h2>
-              <p>She is waiting for a matching blood stem cell donor.</p>
-            </div>
-            <button class="icon-button" type="button" id="play-pause" aria-label="Pause story" title="Pause story">
-              <span id="play-pause-icon" aria-hidden="true">Ⅱ</span>
-            </button>
-          </div>
-          <div class="progress-block">
-            <div class="progress-track" role="progressbar" aria-label="Story progress" aria-valuemin="0" aria-valuemax="30" aria-valuenow="0" id="story-progress">
-              <span class="progress-fill" id="progress-fill"></span>
-            </div>
-            <div class="time-row"><span id="elapsed-time">0:00</span><span id="remaining-time">0:30 left</span></div>
-          </div>
-        </div>
-
-        <div class="story-actions">
-          <button class="button button--pink" type="button" id="continue-story" hidden>CONTINUE <span aria-hidden="true">→</span></button>
-          <button class="text-button" type="button" id="skip-story">Skip story <span aria-hidden="true">→</span></button>
-        </div>
-      </section>
-
-      <section class="screen screen--choice" id="choice-screen" aria-labelledby="choice-heading" hidden>
-        <button class="back-button" type="button" id="choice-back"><span aria-hidden="true">←</span> Replay story</button>
-        <h1 id="choice-heading">Leave your email.</h1>
-
-        <form id="email-form" novalidate>
-          <label for="email">Email address</label>
-          <input id="email" name="email" type="email" inputmode="email" autocomplete="email" placeholder="you@example.com" aria-describedby="email-error" required />
-          <p class="error-message" id="email-error" role="alert" hidden></p>
-          <button class="button button--pink" type="submit" id="email-submit">KEEP ME INFORMED <span aria-hidden="true">→</span></button>
-        </form>
-        <p class="email-result" id="email-result" role="status" tabindex="-1" hidden>Done. No email was sent.</p>
-
-        <div class="divider"><span>OR</span></div>
-        <a class="button button--outline" href="https://www.nmdp.org/get-involved/join-the-registry" target="_blank" rel="noopener noreferrer" id="official-link" aria-label="Continue to the official NMDP website, opens in a new tab">CONTINUE TO NMDP <span aria-hidden="true">↗</span></a>
-      </section>
-    </main>
   </body>
 </html>
