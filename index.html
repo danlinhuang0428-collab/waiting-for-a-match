@@ -30,8 +30,7 @@ a { text-decoration: none; }
 .app-shell { width: 100%; max-width: 460px; min-height: 100dvh; margin: 0 auto; background: var(--paper); }
 .topbar { display: flex; align-items: center; height: 58px; padding: 0 24px; border-bottom: 1px solid #e9e5df; }
 .brand { display: flex; align-items: baseline; gap: 9px; white-space: nowrap; }
-.brand__press { font: 700 27px/1 Georgia, 'Times New Roman', serif; letter-spacing: -.07em; }
-.brand__period { color: var(--pink); }
+.brand__merchant { font: 700 clamp(15px, 4.2vw, 20px)/1.05 Georgia, 'Times New Roman', serif; letter-spacing: -.04em; }
 .brand__cross { color: #77747b; font-size: 17px; }
 .brand__nmdp { font-size: 14px; font-weight: 900; letter-spacing: -.045em; }
 
@@ -121,8 +120,8 @@ form .button { margin-top: 12px; }
   <body>
     <main class="app-shell" id="app">
       <header class="topbar">
-        <div class="brand" aria-label="Press and NMDP concept partnership">
-          <span class="brand__press">press<span class="brand__period">.</span></span>
+        <div class="brand" aria-label="Starbucks Coffee and NMDP concept partnership">
+          <span class="brand__merchant">Starbucks Coffee</span>
           <span class="brand__cross" aria-hidden="true">×</span>
           <span class="brand__nmdp">NMDP</span>
         </div>
