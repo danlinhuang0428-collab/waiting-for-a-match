@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta name="theme-color" content="#faf7f2" />
-    <meta name="description" content="A 30-second story about waiting for a match." />
+    <meta name="description" content="A 60-second story about waiting for a match." />
     <title>Waiting for a Match</title>
     <style>
 :root {
@@ -41,7 +41,7 @@ h1, h2, p { margin-top: 0; }
 .story-intro h1 { margin: 12px 0 20px; font-size: clamp(25px, 7.2vw, 34px); line-height: 1.1; letter-spacing: -.055em; }
 .story-intro h1 em { color: var(--pink); font-family: Georgia, 'Times New Roman', serif; font-size: 1.03em; font-weight: 400; letter-spacing: -.055em; }
 .story-player { width: 100%; }
-.story-frame { position: relative; overflow: hidden; width: 100%; aspect-ratio: 1 / .94; border-radius: 20px; background: #f4dfe7; }
+.story-frame { position: relative; overflow: hidden; width: 100%; aspect-ratio: 1 / 1; border-radius: 20px; background: #f4dfe7; }
 .story-frame video { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center top; }
 .story-frame__play { position: absolute; inset: auto 50% 22px auto; transform: translateX(50%); display: flex; align-items: center; justify-content: center; gap: 12px; min-width: 166px; min-height: 46px; padding: 10px 16px; border: 0; border-radius: 24px; background: var(--pink); color: white; font-size: 12px; font-weight: 900; letter-spacing: .05em; white-space: nowrap; }
 .story-frame__play span { font-size: 16px; }
@@ -58,6 +58,7 @@ video::cue { color: white; background: rgba(0, 0, 0, .72); font: 600 15px/1.35 A
 .progress-track { height: 6px; overflow: hidden; border-radius: 99px; background: #e4e3df; }
 .progress-fill { display: block; width: 0; height: 100%; border-radius: inherit; background: var(--pink); }
 .time-row { display: flex; justify-content: space-between; margin-top: 7px; color: #5a5960; font-size: 11px; font-weight: 700; }
+.prototype-note { margin: 13px 0 0; color: #55545a; font-size: 12px; line-height: 1.4; }
 .story-actions { display: flex; flex-direction: column; align-items: stretch; margin-top: auto; padding-top: 18px; }
 
 .button { display: flex; align-items: center; justify-content: space-between; gap: 16px; width: 100%; min-height: 52px; padding: 12px 18px; border: 2px solid transparent; border-radius: 12px; font-size: 13px; font-weight: 900; letter-spacing: .035em; text-align: left; transition: background-color .15s ease; }
@@ -88,14 +89,12 @@ form .button { margin-top: 12px; }
   .topbar { padding-right: 18px; padding-left: 18px; }
   .screen { padding-right: 18px; padding-left: 18px; }
   .story-intro h1 { font-size: 25px; }
-  .story-frame { aspect-ratio: 1 / .84; }
   .screen--choice h1 { font-size: 38px; }
 }
 
 @media (max-height: 690px) {
   .screen--story { padding-top: 15px; }
   .story-intro h1 { margin: 8px 0 13px; }
-  .story-frame { aspect-ratio: 1 / .78; }
   .player-meta { padding-top: 11px; }
   .progress-block { margin-top: 12px; }
   .story-actions { padding-top: 9px; }
@@ -129,33 +128,34 @@ form .button { margin-top: 12px; }
 
       <section class="screen screen--story" id="story-screen" aria-labelledby="story-heading">
         <div class="story-intro">
-          <p class="eyebrow"><span class="eyebrow__line"></span>A 30-SECOND STORY</p>
+          <p class="eyebrow"><span class="eyebrow__line"></span>A 60-SECOND STORY</p>
           <h1 id="story-heading">Your drink is being made.<br /><em>Meet someone waiting, too.</em></h1>
         </div>
 
-        <div class="story-player" aria-label="Fictional 30-second patient story video">
+        <div class="story-player" aria-label="Fictional 60-second patient story video">
           <div class="story-frame" id="story-frame">
-            <video id="story-video" preload="metadata" playsinline poster="video/final-poster.jpg" aria-label="Fictional dramatization of Marcus finding a matching blood stem cell donor">
-              <source src="video/story-30s-final.mp4" type="video/mp4" />
-              <track kind="captions" src="video/story-captions.vtt" srclang="en" label="English captions" default />
+            <video id="story-video" preload="metadata" playsinline poster="video/nia-story-poster.jpg" aria-label="Fictional story of Nia, a dancer with leukemia, finding a matching blood stem cell donor">
+              <source src="video/nia-story-60s.mp4" type="video/mp4" />
+              <track kind="captions" src="video/nia-story-captions.vtt" srclang="en" label="English captions" />
             </video>
-            <button class="story-frame__play" type="button" id="play-overlay" aria-label="Play 30-second story with sound"><span aria-hidden="true">▶</span> PLAY STORY</button>
+            <button class="story-frame__play" type="button" id="play-overlay" aria-label="Play 60-second story with sound"><span aria-hidden="true">▶</span> PLAY STORY</button>
           </div>
           <div class="player-meta">
             <div>
-              <h2>Meet Marcus <span class="fictional-label">(fictional)</span></h2>
-              <p>He needed a matching blood stem cell donor.</p>
+              <h2>Meet Nia</h2>
+              <p>She hopes to return to dance rehearsal.</p>
             </div>
             <button class="icon-button" type="button" id="play-pause" aria-label="Play story" title="Play story">
               <span id="play-pause-icon" aria-hidden="true">▶</span>
             </button>
           </div>
           <div class="progress-block">
-            <div class="progress-track" role="progressbar" aria-label="Story progress" aria-valuemin="0" aria-valuemax="30" aria-valuenow="0" id="story-progress">
+            <div class="progress-track" role="progressbar" aria-label="Story progress" aria-valuemin="0" aria-valuemax="60" aria-valuenow="0" id="story-progress">
               <span class="progress-fill" id="progress-fill"></span>
             </div>
-            <div class="time-row"><span id="elapsed-time">0:00</span><span id="remaining-time">0:30 left</span></div>
+            <div class="time-row"><span id="elapsed-time">0:00</span><span id="remaining-time">1:00 left</span></div>
           </div>
+          <p class="prototype-note">AI-generated footage is temporary for this high-fidelity prototype. The final version will use a filmed short documentary.</p>
         </div>
 
         <div class="story-actions">
@@ -181,7 +181,7 @@ form .button { margin-top: 12px; }
       </section>
     </main>
   <script>
-const STORY_LENGTH = 30;
+const STORY_LENGTH = 60;
 const screens = {
   story: document.getElementById("story-screen"),
   choice: document.getElementById("choice-screen")
@@ -207,6 +207,11 @@ let currentScreen = "story";
 let completed = false;
 let submitTimer;
 
+function formatTime(seconds) {
+  const wholeSeconds = Math.max(0, Math.floor(seconds));
+  return `${Math.floor(wholeSeconds / 60)}:${String(wholeSeconds % 60).padStart(2, "0")}`;
+}
+
 function showScreen(name) {
   if (name !== "story") video.pause();
   currentScreen = name;
@@ -225,8 +230,8 @@ function renderStory() {
   const playing = !video.paused && !video.ended;
   progress.setAttribute("aria-valuenow", String(wholeSeconds));
   progressFill.style.width = `${(elapsed / STORY_LENGTH) * 100}%`;
-  elapsedTime.textContent = `0:${String(wholeSeconds).padStart(2, "0")}`;
-  remainingTime.textContent = completed ? "Story complete" : `0:${String(Math.max(0, Math.ceil(STORY_LENGTH - elapsed))).padStart(2, "0")} left`;
+  elapsedTime.textContent = formatTime(wholeSeconds);
+  remainingTime.textContent = completed ? "Story complete" : `${formatTime(Math.ceil(STORY_LENGTH - elapsed))} left`;
   playPause.hidden = completed;
   playPauseIcon.textContent = playing ? "Ⅱ" : "▶";
   playPause.setAttribute("aria-label", playing ? "Pause story" : "Play story with sound");
